@@ -1,26 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { MdShoppingBasket } from "react-icons/md";
-
-import { Contaniner, Cart } from './styles';
+import { Container, Cart } from './styles';
 import logo from '../../asserts/images/logo.svg';
 
 export default function Header() {
     return (
-        
-        <Contaniner >
+        <Container >
             <Link to="/">
-                <image src={logo} alt="Rocketshoes" />
+                <figure>
+                    <img src={logo} alt="RocketShoes" />
+                </figure>
             </Link>
 
-        <Cart to="/cart">
-            <div>
-                <strong>My cart</strong>
-                <span>tree itens</span>
-            </div>
-            <MdShoppingBasket size={36} color='#FFF'/>
-        </Cart>
-        </Contaniner>
+            <Cart to="/cart">
+                <div>
+                    <strong>Meu carrinho</strong>
+                    <span>3 itens</span>
+                </div>
+                <MdShoppingBasket size={36} color='#FFF' />
+            </Cart>
+        </Container>
     );
 }

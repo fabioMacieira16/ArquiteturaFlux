@@ -1,4 +1,4 @@
-import { createGlobalStyle   } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import background from '../asserts/images/background.svg';
 
