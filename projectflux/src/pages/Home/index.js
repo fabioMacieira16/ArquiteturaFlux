@@ -26,17 +26,17 @@ class Home extends Component {
     this.setState({ products: data });
   }
 
-  handleAddProduct = (product) => {
-    // const { dispatch } = this.props;
+  handleAddProduct = product => {
+    const { dispatch } = this.props;
     
-    // dispatch ({
-    //   type: 'ADD_TO_CART',
-    //   product,
-    // });
+    dispatch ({
+      type: 'ADD_TO_CART',
+      product,
+    });
     
-    const { addToCart } = this.props;
-    addToCart(product);
-    // console.log(product);
+    // const { addToCart } = this.props;
+    // addToCart(product);
+
   };
 
   render() {
@@ -67,7 +67,9 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(CartActions, dispatch);
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(CartActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(Home);
+//export default connect(null, mapDispatchToProps)(Home);
+
+export default connect()(Home);
