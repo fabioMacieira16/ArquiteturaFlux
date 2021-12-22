@@ -24,6 +24,11 @@ export const ProductList = styled.ul`
             line-weight: bold;
             margin: 5px 0 20px;
         }
+        > span {
+            font-size: 21px;
+            font-weight: bold;
+            margin: 5px 0 20px;
+        }
 
         button {
             background: #7159c1;
@@ -54,6 +59,7 @@ export const ProductList = styled.ul`
         }
 
         span {
+            
             flex: 1;
             text-align: center;
             font-weight: bold;

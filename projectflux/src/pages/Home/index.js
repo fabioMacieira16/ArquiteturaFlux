@@ -1,59 +1,73 @@
-import React, { Component } from "react";
-import { connect } from 'react-redux'
-import { MdShoppingBasket } from "react-icons/md";
-import { formatPrice } from "../../util/format";
-import api from '../../services/api'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { MdAddShoppingCart } from 'react-icons/md';
+import { formatPrice } from '../../util/format';
+import api from '../../services/api';
 
-import { ProductList } from "./styles";
+import * as CartActions from '../../store/modules/cart/actions';
+
+import { ProductList } from './styles';
+
 class Home extends Component {
-    state = {
-        products: [],
-    }
+  constructor(props) {
+    super(props);
+    this.state = { products: [] };
+  }
 
-    async componetDidMount() {
-        const response = await api.get('products');
-        
-        const data = response.data.map(product => ({
-            ...product,
-            priceFormatted: formatPrice(product.price),
-        }));
-        console.log(response)
+  async componentDidMount() {
+    const response = await api.get('products');
 
-        this.setState({ products: data })
-    }
+    const data = response.data.map((product) => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
 
-    handleAddProduct = product => {
-        const { dispatch } = this.props;
+    this.setState({ products: data });
+  }
 
-        dispatch({
-            type: 'ADD_TO_CART',
-            product,
-        });
-    };
+  handleAddProduct = (product) => {
+    // const { dispatch } = this.props;
+    
+    // dispatch ({
+    //   type: 'ADD_TO_CART',
+    //   product,
+    // });
+    
+    const { addToCart } = this.props;
+    addToCart(product);
+    // console.log(product);
+  };
 
-    render() {
-        const { products } = this.state;
+  render() {
+    const { products } = this.state;
 
-        return (
-            <ProductList>
-                {products.map(product => (
-                    <li key={product.id}>
-                        <img src={product.image} alt={product.title} />
-                        <strong>{product.title}</strong>
-                        <span>{product.priceFormatted}</span>
+    return (
+      <ProductList>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
 
-                        <button type="button" onClick={() => this.handleAddProduct(product)}                        >
-                            <div>
-                                <MdShoppingBasket size={16} color="#FFF" /> 3
-                            </div>
+            <button
+              type="button"
+              onClick={() => this.handleAddProduct(product)}
+            >
+              <div>
+                <MdAddShoppingCart size={16} color="#fff" /> 3
+              </div>
 
-                            <span>ADICIONAR AO CARRINHO</span>
-                        </button>
-                    </li>
-                ))}
-            </ProductList>
-        );
-    }
+              <span>ADICIONAR AO CARRINHO</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }
 
-export default connect()(Home);  
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(Home);
