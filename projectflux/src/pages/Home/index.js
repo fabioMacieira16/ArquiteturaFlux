@@ -11,12 +11,13 @@ class Home extends Component {
     }
 
     async componetDidMount() {
-        const responser = await api.get('products');
-
-        const data = responser.data.map(product => ({
-            ... product,
+        const response = await api.get('products');
+        
+        const data = response.data.map(product => ({
+            ...product,
             priceFormatted: formatPrice(product.price),
         }));
+        console.log(response)
 
         this.setState({ products: data })
     }
@@ -36,18 +37,17 @@ class Home extends Component {
         return (
             <ProductList>
                 {products.map(product => (
-                    <li key={products.id}>
+                    <li key={product.id}>
                         <img src={product.image} alt={product.title} />
                         <strong>{product.title}</strong>
                         <span>{product.priceFormatted}</span>
 
-                        <button type="button" onClick={() => this.handleAddProduct(product)}
-                        >
+                        <button type="button" onClick={() => this.handleAddProduct(product)}                        >
                             <div>
                                 <MdShoppingBasket size={16} color="#FFF" /> 3
                             </div>
 
-                            <span>ADICIOANAR AO CARRINHO</span>
+                            <span>ADICIONAR AO CARRINHO</span>
                         </button>
                     </li>
                 ))}

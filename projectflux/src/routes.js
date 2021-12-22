@@ -11,4 +11,6 @@ export default function Routes() {
       <Route path="/cart" component={Cart} />
     </Switch>
   );
-}
+} 
+
+

@@ -9,9 +9,8 @@ import { Container, Cart } from './styles';
 import logo from '../../asserts/images/logo.svg';
 
 function Header({ cartSize }) {
-    console.log(cartSize);
     return (
-        <Container >
+        <Container>
             <Link to="/">
                 <figure>
                     <img src={logo} alt="RocketShoes" />
