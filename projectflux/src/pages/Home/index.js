@@ -27,15 +27,8 @@ class Home extends Component {
   }
 
   handleAddProduct = product => {
-    const { dispatch } = this.props;
-    
-    dispatch ({
-      type: 'ADD_TO_CART',
-      product,
-    });
-    
-    // const { addToCart } = this.props;
-    // addToCart(product);
+    const { addToCart } = this.props;
+    addToCart(product);
 
   };
 
@@ -67,9 +60,7 @@ class Home extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) =>
-//   bindActionCreators(CartActions, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(CartActions, dispatch);
 
-//export default connect(null, mapDispatchToProps)(Home);
-
-export default connect()(Home);
+export default connect(null, mapDispatchToProps)(Home);
