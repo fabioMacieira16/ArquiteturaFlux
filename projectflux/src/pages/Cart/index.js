@@ -13,13 +13,13 @@ import * as CartActions from '../../store/modules/cart/actions';
 
 import { Container, ProductTable, Total } from './styles';
 
-function Cart({ cart, removeFromCart, updateAmount }) {
- 
-  function increment (product) {
+function Cart({ cart, total, removeFromCart, updateAmount }) {
+
+  function increment(product) {
     updateAmount(product.id, product.amount + 1);
   }
 
-  function decrement (product) {
+  function decrement(product) {
     updateAmount(product.id, product.amount - 1);
   }
 
@@ -48,13 +48,13 @@ function Cart({ cart, removeFromCart, updateAmount }) {
               <td>
                 <div>
                   <button type="button"
-                   onClick={() => decrement(product)}
+                    onClick={() => decrement(product)}
                   >
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
                   </button>
                   <input type="number" readOnly value={product.amount} />
-                  <button type="button" 
-                   onClick={() => increment(product)}
+                  <button type="button"
+                    onClick={() => increment(product)}
                   >
                     <MdAddCircleOutline size={20} color="#7159c1" />
                   </button>
@@ -82,9 +82,8 @@ function Cart({ cart, removeFromCart, updateAmount }) {
         <Total>
           <span>TOTAL</span>
           <strong>
-              {/* {total} */}
-              1.000.000.00
-              </strong>
+            { total }
+          </strong>
         </Total>
       </footer>
     </Container>
@@ -92,7 +91,15 @@ function Cart({ cart, removeFromCart, updateAmount }) {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart,
+  cart: state.cart.map(product => ({
+    ... product, 
+    subtotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+        return total + product.price * product.amount;
+    }, 0)
+  ),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -101,4 +108,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-  )(Cart);
+)(Cart);
