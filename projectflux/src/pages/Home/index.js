@@ -29,7 +29,6 @@ class Home extends Component {
   handleAddProduct = (id) => {
     const { addToCartRequest } = this.props;
     addToCartRequest(id);
-
   };
 
   render() {
@@ -73,6 +72,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(CartActions, dispatch);
 
 export default connect(
-   mapStateToProps,
-   mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Home);
