@@ -1,5 +1,5 @@
 # Arquitetura Flux com Redux Rocketseat
- Curso de react com a construindo de uma loja virtual - RocketShoes
+ Curso de react com a construção de uma loja virtual - RocketShoes
  # Informações do curso
  Professor : Diego Fernandes 
 
